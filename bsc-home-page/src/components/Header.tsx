@@ -1,65 +1,86 @@
 import React, { useState, useContext } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import styled from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
-import Switch from '@mui/material/Switch';
 import { ThemeContext } from '../theme/ThemeProvider';
+import Switch from '@mui/material/Switch';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const Header: React.FC = () => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+const AppBar = styled.header`
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+`;
+
+const Title = styled.h1`
+    font-size: 1.5em;
+    margin: 0;
+`;
+
+const MenuButton = styled.button`
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+`;
+
+const Menu = styled.nav<{ open: boolean }>`
+    display: ${({ open }) => (open ? 'block' : 'none')};
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 10px;
+`;
+
+const MenuItem = styled(ScrollLink)`
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #444;
+    }
+`;
+
+const Header = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
     const { toggleTheme, theme } = useContext(ThemeContext);
 
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
+    const handleMenuToggle = () => {
+        setMenuOpen(!menuOpen);
     };
 
     return (
-        <AppBar position="sticky">
-            <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Bro Software Consulting
-                </Typography>
+        <AppBar>
+            <Title>Bro Software Consulting</Title>
+            <div>
                 <Switch checked={theme === 'dark'} onChange={toggleTheme} />
-                <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenu}>
+                <MenuButton onClick={handleMenuToggle}>
                     <MenuIcon />
-                </IconButton>
-                <Menu
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                >
-                    <MenuItem onClick={handleClose}>
-                        <ScrollLink to="home" smooth={true} duration={500}>Home</ScrollLink>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                        <ScrollLink to="about" smooth={true} duration={500}>Sobre</ScrollLink>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                        <ScrollLink to="services" smooth={true} duration={500}>Serviços</ScrollLink>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                        <ScrollLink to="portfolio" smooth={true} duration={500}>Portfólio</ScrollLink>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                        <ScrollLink to="testimonials" smooth={true} duration={500}>Depoimentos</ScrollLink>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                        <ScrollLink to="blog" smooth={true} duration={500}>Blog</ScrollLink>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                        <ScrollLink to="contact" smooth={true} duration={500}>Contato</ScrollLink>
-                    </MenuItem>
-                </Menu>
-            </Toolbar>
+                </MenuButton>
+            </div>
+            <Menu open={menuOpen}>
+                <MenuItem to="home" smooth={true} duration={500} onClick={handleMenuToggle}>Home</MenuItem>
+                <MenuItem to="about" smooth={true} duration={500} onClick={handleMenuToggle}>Sobre</MenuItem>
+                <MenuItem to="services" smooth={true} duration={500} onClick={handleMenuToggle}>Serviços</MenuItem>
+                <MenuItem to="portfolio" smooth={true} duration={500} onClick={handleMenuToggle}>Portfólio</MenuItem>
+                <MenuItem to="testimonials" smooth={true} duration={500} onClick={handleMenuToggle}>Depoimentos</MenuItem>
+                <MenuItem to="blog" smooth={true} duration={500} onClick={handleMenuToggle}>Blog</MenuItem>
+                <MenuItem to="contact" smooth={true} duration={500} onClick={handleMenuToggle}>Contato</MenuItem>
+            </Menu>
         </AppBar>
     );
 };

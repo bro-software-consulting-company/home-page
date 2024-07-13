@@ -1,59 +1,67 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import styled from 'styled-components';
 
-const Contact: React.FC = () => (
-    <Box id="contact" sx={{ py: 10 }}>
-        <Box className="container">
-            <Typography variant="h2" component="h2" gutterBottom>
-                Contato
-            </Typography>
-            <Box
-                component="form"
-                id="contact-form"
-                action="#"
-                method="post"
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    maxWidth: 600,
-                    mx: 'auto'
-                }}
-            >
-                <TextField
-                    label="Nome"
-                    variant="outlined"
-                    margin="normal"
-                    required
-                />
-                <TextField
-                    label="Email"
-                    variant="outlined"
-                    margin="normal"
-                    type="email"
-                    required
-                />
-                <TextField
-                    label="Mensagem"
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    multiline
-                    rows={4}
-                />
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    sx={{ mt: 2 }}
-                >
-                    Enviar
-                </Button>
-            </Box>
-        </Box>
-    </Box>
+const ContactSection = styled.section`
+    padding: 20px;
+`;
+
+const Container = styled.div`
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+`;
+
+const Title = styled.h2`
+    font-size: 2em;
+    margin-bottom: 0.5em;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+`;
+
+const Input = styled.input`
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1em;
+`;
+
+const TextArea = styled.textarea`
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1em;
+`;
+
+const Button = styled.button`
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: #0d47a1;
+    color: white;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #0c3e91;
+    }
+`;
+
+const Contact = () => (
+    <ContactSection id="contact">
+        <Container>
+            <Title>Contato</Title>
+            <Form>
+                <Input type="text" placeholder="Nome" required />
+                <Input type="email" placeholder="Email" required />
+                <TextArea placeholder="Mensagem" rows={4} required />
+                <Button type="submit">Enviar</Button>
+            </Form>
+        </Container>
+    </ContactSection>
 );
 
 export default Contact;

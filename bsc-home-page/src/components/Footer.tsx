@@ -1,15 +1,22 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import styled from 'styled-components';
 
-const Footer: React.FC = () => (
-    <Box component="footer" sx={{ backgroundColor: '#333', color: '#fff', py: 2 }}>
-        <Box className="container">
-            <Typography variant="body2" component="p" align="center">
-                &copy; 2024 Bro Software Consulting. Todos os direitos reservados.
-            </Typography>
-        </Box>
-    </Box>
+const FooterContainer = styled.footer`
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+`;
+
+const FooterText = styled.p`
+    margin: 0;
+    font-size: 1em;
+`;
+
+const Footer = () => (
+    <FooterContainer>
+        <FooterText>&copy; 2024 Bro Software Consulting. Todos os direitos reservados.</FooterText>
+    </FooterContainer>
 );
 
 export default Footer;

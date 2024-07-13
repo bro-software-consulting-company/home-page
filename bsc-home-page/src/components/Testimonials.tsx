@@ -1,19 +1,35 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import styled from 'styled-components';
 
-const Testimonials: React.FC = () => (
-    <Box id="testimonials" sx={{ py: 10 }}>
-        <Box className="container">
-            <Typography variant="h2" component="h2" gutterBottom>
-                Depoimentos
-            </Typography>
-            <Typography variant="body1" component="p">
-                Veja o que nossos clientes dizem sobre nós.
-            </Typography>
+const TestimonialsSection = styled.section`
+    padding: 20px;
+`;
+
+const Container = styled.div`
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+`;
+
+const Title = styled.h2`
+    font-size: 2em;
+    margin-bottom: 0.5em;
+`;
+
+const Text = styled.p`
+    font-size: 1.2em;
+    line-height: 1.5;
+`;
+
+const Testimonials = () => (
+    <TestimonialsSection id="testimonials">
+        <Container>
+            <Title>Depoimentos</Title>
+            <Text>Veja o que nossos clientes dizem sobre nós.</Text>
             {/* Adicione aqui os depoimentos dos clientes */}
-        </Box>
-    </Box>
+        </Container>
+    </TestimonialsSection>
 );
 
 export default Testimonials;
